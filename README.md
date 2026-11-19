@@ -124,7 +124,57 @@ Esta documentação será atualizada durante o desenvolvimento do robô, registr
 - [x] Identificação dos componentes do kit
 - [ ] Definição da placa controladora
 - [ ] Elaboração do croqui
-- [ ] Montagem do chassi
-- [ ] Integração dos componentes eletrônicos
-- [ ] Desenvolvimento do software
-- [ ] Testes de movimentação
+- [x] Montagem do chassi
+- [x] Integração dos componentes eletrônicos
+- [x] Desenvolvimento do software
+- [x] Testes de movimentação
+
+---
+
+## 🛠️ 4. Adições GS
+
+Para a etapa da Global Solution, o carrinho 2WD foi aprimorado e apresentado como PassoLivre Rover, um protótipo de robô móvel voltado à demonstração de detecção e desvio de obstáculos.
+
+### 4.1 Componentes integrados
+
+- Arduino Uno: placa controladora utilizada para receber os sinais dos sensores e comandar os motores.
+- Módulo L298N: driver responsável pelo acionamento dos dois motores DC e pelas manobras do carrinho.
+- Sensor VL53L0X: sensor de distância utilizado para identificar obstáculos próximos à frente do robô.
+- Módulo BFD-1000 (bumper): o mecanismo de contato físico do módulo foi aproveitado como sensor adicional de colisão.
+- LED vermelho: indicador visual acionado quando uma colisão é detectada pelo bumper.
+- Cobertura de papelão pintada de preto: acabamento externo adicionado para melhorar a apresentação do protótipo e acomodar visualmente sua estrutura.
+
+### 4.2 Conexões utilizadas
+
+| Componente | Conexão com o Arduino Uno |
+| --- | --- |
+| L298N — IN1 | D11 |
+| L298N — IN2 | D10 |
+| L298N — IN3 | D9 |
+| L298N — IN4 | D8 |
+| Bumper do BFD-1000 | D3 |
+| LED vermelho | D4 |
+| VL53L0X — SDA | A4 (SDA) |
+| VL53L0X — SCL | A5 (SCL) |
+
+Os componentes também possuem as conexões de alimentação e terra necessárias ao funcionamento. Os canais de leitura de linha do BFD-1000 não foram utilizados na versão final.
+
+### 4.3 Adaptação do sensor adicional
+
+A proposta inicial era utilizar o BFD-1000 para reconhecer uma faixa preta no chão. Durante os testes, a detecção não apresentou a consistência necessária. Por isso, a função de seguir linha foi abandonada e o bumper integrado ao módulo passou a ser utilizado para identificar contatos físicos com obstáculos.
+
+Essa mudança permitiu reutilizar o componente disponível, mantendo o foco na detecção de obstáculos e acrescentando uma forma de resposta a colisões.
+
+### 4.4 Lógica de funcionamento
+
+1. O carrinho avança utilizando os motores controlados pelo Arduino e pelo L298N.
+2. O sensor de distância VL53L0X auxilia na identificação de obstáculos à frente.
+3. Caso ocorra contato físico, o bumper envia um sinal ao Arduino.
+4. O LED vermelho acende para indicar a colisão.
+5. O carrinho interrompe o avanço e realiza uma manobra de ré para se afastar do obstáculo.
+6. Em seguida, executa uma curva de aproximadamente 90° para a direita.
+7. O LED deixa de sinalizar a colisão, e o carrinho retoma o deslocamento.
+
+### 4.5 Link para apresentação/demonstração no youtube
+
+- [Demonstração](https://www.youtube.com/watch?v=ZAMSyCXbFsk)
