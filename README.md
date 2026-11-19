@@ -6,6 +6,7 @@ Projeto de desenvolvimento e documentação de um **robô móvel com chassi 2WD*
 
 - **Gabriel Riquetto Reis** — RM 98685
 - **Leticia Cristina Gandarez Resina** — RM 98069
+- **Sabrina Flores** - RM 550781
 
 ---
 
